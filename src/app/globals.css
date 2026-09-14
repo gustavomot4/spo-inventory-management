@@ -8,13 +8,32 @@
    ex: bg-background/50 funciona porque usamos "rgb(var(--background) / <alpha>)"
    ============================================================================= */
 :root {
+  color-scheme: light;
+  --surface:          255 255 255;
+  --accent:           253 242 248;
+  --accent-foreground:157 23 77;
+  --accent-border:    244 114 182;
+  --success:          21 128 61;
+  --success-muted:    240 253 244;
+  --success-border:   134 239 172;
+  --warning:          146 64 14;
+  --warning-muted:    255 251 235;
+  --warning-border:   252 211 77;
+  --danger-muted:     254 242 242;
+  --danger-border:    252 165 165;
+  --danger-solid:     185 28 28;
+  --primary-hover:    190 24 93;
+  --chart-1:          190 24 93;
+  --chart-2:          180 83 9;
+  --chart-3:          37 99 235;
+  --chart-4:          4 120 87;
   /* Superfícies */
   --background:       249 250 251;   /* gray-50  */
   --foreground:        17  24  39;   /* gray-900 */
 
   /* Elementos secundários */
   --muted:            243 244 246;   /* gray-100 */
-  --muted-foreground: 107 114 128;   /* gray-500 */
+  --muted-foreground: 75 85 99;
 
   /* Bordas e inputs */
   --border:           229 231 235;   /* gray-200 */
@@ -22,7 +41,7 @@
   --ring:             219  39 119;   /* brand-600 */
 
   /* Ações destrutivas */
-  --destructive:        239  68  68; /* red-500  */
+  --destructive:        185 28 28;
   --destructive-foreground: 255 255 255;
 
   /* Ação principal (brand) */
@@ -30,8 +49,52 @@
   --primary-foreground: 255 255 255;
 }
 
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --background:       15 23 42;
+  --surface:          30 41 59;
+  --foreground:       241 245 249;
+  --muted:            51 65 85;
+  --muted-foreground: 203 213 225;
+  --border:           71 85 105;
+  --input:            148 163 184;
+  --ring:             244 114 182;
+  --accent:           80 25 53;
+  --accent-foreground:251 182 211;
+  --accent-border:    190 80 133;
+  --success:          134 239 172;
+  --success-muted:    20 60 43;
+  --success-border:   34 130 80;
+  --warning:          253 211 115;
+  --warning-muted:    68 47 22;
+  --warning-border:   161 111 38;
+  --destructive:      252 165 165;
+  --danger-muted:     73 29 39;
+  --danger-border:    185 76 91;
+  --chart-1:          244 114 182;
+  --chart-2:          251 191 36;
+  --chart-3:          96 165 250;
+  --chart-4:          52 211 153;
+}
+
 /* Reset básico */
 * { box-sizing: border-box; }
+
+@layer base {
+  :focus-visible {
+    outline: 2px solid rgb(var(--ring));
+    outline-offset: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
 
 /* =============================================================================
    QA-056: iOS Safari aplica zoom automático ao focar inputs com font-size < 16px.
@@ -44,7 +107,7 @@
   input:not([type='checkbox']):not([type='radio']),
   select,
   textarea {
-    font-size: 16px;
+    font-size: max(16px, 1rem);
   }
 }
 
@@ -64,10 +127,45 @@ body {
     margin: 4mm;
   }
 
+  html {
+    font-size: 16px !important;
+    color-scheme: light !important;
+  }
+
+  body, body * {
+    color: #000 !important;
+    background-color: transparent !important;
+    border-color: #000 !important;
+    box-shadow: none !important;
+  }
+
   body {
     font-size: 11px;
-    color: #000;
-    background: #fff;
+    background: #fff !important;
+  }
+
+  .app-shell, .app-main, .app-shell main {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  .receipt-page {
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+  }
+
+  .receipt {
+    width: 72mm;
+    max-width: 100%;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .receipt-item {
+    break-inside: avoid;
   }
 
   .no-print  { display: none !important; }

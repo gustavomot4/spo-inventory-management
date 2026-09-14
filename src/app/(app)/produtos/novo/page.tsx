@@ -243,7 +243,7 @@ export default function NovoProdutoPage() {
       </div>
 
       {/* ── Dados do produto ── */}
-      <div className="bg-white rounded-xl border border-border shadow-sm overflow-hidden mb-5">
+      <div className="bg-surface rounded-xl border border-border shadow-sm overflow-hidden mb-5">
         <div className="px-6 py-4 border-b border-border">
           <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
             Dados do Produto
@@ -289,7 +289,7 @@ export default function NovoProdutoPage() {
       </div>
 
       {/* ── Variações ── */}
-      <div className="bg-white rounded-xl border border-border shadow-sm overflow-hidden mb-5">
+      <div className="bg-surface rounded-xl border border-border shadow-sm overflow-hidden mb-5">
         <div className="px-6 py-4 border-b border-border flex items-center justify-between">
           <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
             Variações
@@ -400,7 +400,7 @@ export default function NovoProdutoPage() {
                     onClick={() => removeVariation(v.id)}
                     className={cn(
                       'flex h-9 w-8 items-center justify-center rounded-lg mt-0.5',
-                      'text-muted-foreground hover:text-destructive hover:bg-red-50 transition-colors'
+                      'text-muted-foreground hover:text-destructive hover:bg-danger-muted transition-colors'
                     )}
                     aria-label={`Remover variação ${idx + 1}`}
                   >
@@ -421,15 +421,15 @@ export default function NovoProdutoPage() {
 
       {/* Erro geral */}
       {errors.general && (
-        <div className="mb-4 rounded-lg border border-destructive/30 bg-red-50 px-4 py-3">
+        <div className="mb-4 rounded-lg border border-destructive/30 bg-danger-muted px-4 py-3">
           <p className="text-sm text-destructive">{errors.general}</p>
         </div>
       )}
 
       {/* Sucesso */}
       {savedProductId && (
-        <div className="mb-4 rounded-xl border border-green-200 bg-green-50 px-5 py-4">
-          <p className="text-sm font-semibold text-green-800 mb-3">
+        <div className="mb-4 rounded-xl border border-success-border bg-success-muted px-5 py-4">
+          <p className="text-sm font-semibold text-success mb-3">
             Produto cadastrado com sucesso!
           </p>
           <div className="flex items-center gap-2">

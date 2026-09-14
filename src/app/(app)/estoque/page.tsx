@@ -111,7 +111,7 @@ function EstoqueAtualTab() {
               'rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors',
               filter === key
                 ? 'bg-foreground text-background'
-                : 'bg-white border border-border text-muted-foreground hover:text-foreground hover:border-foreground/30'
+                : 'bg-surface border border-border text-muted-foreground hover:text-foreground hover:border-foreground/30'
             )}
           >
             {label}
@@ -121,7 +121,7 @@ function EstoqueAtualTab() {
 
       {/* QA-023: aviso de lista truncada em lojas com mais de 100 SKUs */}
       {hasMore && (
-        <div className="mb-3 rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm text-amber-800">
+        <div className="mb-3 rounded-lg border border-warning-border bg-warning-muted px-4 py-2.5 text-sm text-warning">
           Exibindo os primeiros 100 produtos cadastrados. Filtre por categoria para ver todos.
         </div>
       )}
@@ -129,7 +129,7 @@ function EstoqueAtualTab() {
       {/* Tabela */}
       {filtered.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-16 text-center">
-          <CheckCircle2 className="h-10 w-10 text-green-400 mb-3" strokeWidth={1.5} />
+          <CheckCircle2 className="h-10 w-10 text-success mb-3" strokeWidth={1.5} />
           <p className="text-sm font-medium text-foreground">
             {filter === 'todos' ? 'Nenhum produto ativo' : 'Nenhum produto nesta categoria'}
           </p>
@@ -138,7 +138,7 @@ function EstoqueAtualTab() {
           </p>
         </div>
       ) : (
-        <div className="bg-white rounded-xl border border-border shadow-sm overflow-hidden">
+        <div className="bg-surface rounded-xl border border-border shadow-sm overflow-hidden">
           {/* Cabeçalho — desktop */}
           <div className="hidden sm:grid grid-cols-[1fr_8rem_6rem_7rem_7rem] gap-3 px-5 py-2.5 border-b border-border bg-muted/30">
             {['Produto', 'Categoria', 'Variações', 'Estoque', 'Status'].map(h => (
@@ -364,11 +364,11 @@ function NovaEntradaTab() {
     <div className="max-w-xl">
       {/* Feedback de sucesso */}
       {success && (
-        <div className="mb-5 flex items-start gap-3 rounded-xl border border-green-200 bg-green-50 px-4 py-3.5">
-          <CheckCircle2 className="h-5 w-5 text-green-600 shrink-0 mt-0.5" aria-hidden="true" />
+        <div className="mb-5 flex items-start gap-3 rounded-xl border border-success-border bg-success-muted px-4 py-3.5">
+          <CheckCircle2 className="h-5 w-5 text-success shrink-0 mt-0.5" aria-hidden="true" />
           <div>
-            <p className="text-sm font-semibold text-green-800">{success.message}</p>
-            <p className="text-sm text-green-700 mt-0.5">
+            <p className="text-sm font-semibold text-success">{success.message}</p>
+            <p className="text-sm text-success mt-0.5">
               Novo estoque: <strong>{success.stockAfter} unidades</strong>
             </p>
           </div>
@@ -376,7 +376,7 @@ function NovaEntradaTab() {
       )}
 
       {/* 1. Produto */}
-      <div className="bg-white rounded-xl border border-border shadow-sm mb-4">
+      <div className="bg-surface rounded-xl border border-border shadow-sm mb-4">
         <div className="px-5 py-3.5 border-b border-border">
           <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
             Produto e Variação
@@ -416,7 +416,7 @@ function NovaEntradaTab() {
 
             {/* Sugestões */}
             {showSuggestions && productSuggestions.length > 0 && !selectedProduct && (
-              <div className="absolute z-10 mt-1 w-full rounded-lg border border-border bg-white shadow-lg overflow-hidden">
+              <div className="absolute z-10 mt-1 w-full rounded-lg border border-border bg-surface shadow-lg overflow-hidden">
                 {productSuggestions.map(p => (
                   <button
                     key={p.id}
@@ -488,7 +488,7 @@ function NovaEntradaTab() {
       </div>
 
       {/* 2. Detalhes da entrada */}
-      <div className="bg-white rounded-xl border border-border shadow-sm overflow-hidden mb-5">
+      <div className="bg-surface rounded-xl border border-border shadow-sm overflow-hidden mb-5">
         <div className="px-5 py-3.5 border-b border-border">
           <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
             Detalhes da Entrada
@@ -525,7 +525,7 @@ function NovaEntradaTab() {
 
       {/* Erro geral */}
       {errors.general && (
-        <div className="mb-4 flex items-center gap-2 rounded-lg border border-destructive/30 bg-red-50 px-4 py-3">
+        <div className="mb-4 flex items-center gap-2 rounded-lg border border-destructive/30 bg-danger-muted px-4 py-3">
           <XCircle className="h-4 w-4 text-destructive shrink-0" />
           <p className="text-sm text-destructive">{errors.general}</p>
         </div>
@@ -574,7 +574,7 @@ export default function EstoquePage() {
             className={cn(
               'px-4 py-2 text-sm font-medium transition-colors border-b-2 -mb-px',
               activeTab === key
-                ? 'border-brand-600 text-brand-600'
+                ? 'border-ring text-accent-foreground'
                 : 'border-transparent text-muted-foreground hover:text-foreground'
             )}
           >

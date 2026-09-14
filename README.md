@@ -4,6 +4,19 @@ Sistema de gestão de estoque e vendas para a loja **Pimenta Ousada**. Controle 
 
 **Stack:** Next.js 14 (App Router) · TypeScript · Prisma · SQLite · Tailwind CSS · Docker
 
+## Acessibilidade e aparência
+
+O menu lateral (ou menu no celular) e a tela de PIN têm controles de fonte e tema:
+
+- **A− / A+**: 87,5%, 100%, 112,5% e 125%. Clique no percentual para restaurar 100%.
+- **Claro / Escuro / Sistema**: Sistema acompanha a preferência de aparência do dispositivo.
+- As escolhas persistem por navegador e endereço do sistema e sincronizam entre abas. Sem acesso ao armazenamento local, continuam funcionando durante a sessão da página.
+- A comanda térmica mantém texto preto, fundo branco e tamanho de impressão independente dessas escolhas.
+
+Detalhes da adaptação do plano Brasil Drop, validação e reversão: [docs/merge-brasil-drop.md](docs/merge-brasil-drop.md).
+
+Para verificar as preferências e o contraste, execute `npm test`. Os testes de navegador usam um banco temporário e a porta 3100: instale o Chromium com `npx playwright install chromium` e execute `npm run test:e2e`. No Windows, para usar o Edge já instalado, defina `$env:PLAYWRIGHT_CHANNEL='msedge'` no PowerShell antes do comando. Não execute o build local e o servidor de testes simultaneamente, pois ambos usam `.next`.
+
 ---
 
 ## 🤖 Como este projeto foi feito (vibe coding)

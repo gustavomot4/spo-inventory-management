@@ -52,7 +52,7 @@ function AlertWidget() {
 
   if (loading) {
     return (
-      <div className="flex items-center gap-3 rounded-xl border border-border bg-white px-5 py-4 shadow-sm">
+      <div className="flex items-center gap-3 rounded-xl border border-border bg-surface px-5 py-4 shadow-sm">
         <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
         <p className="text-sm text-muted-foreground">Verificando estoque...</p>
       </div>
@@ -61,8 +61,8 @@ function AlertWidget() {
 
   if (alerts.length === 0) {
     return (
-      <div className="flex items-center gap-3 rounded-xl border border-border bg-white px-5 py-4 shadow-sm">
-        <CheckCircle2 className="h-5 w-5 text-green-500 shrink-0" aria-hidden="true" />
+      <div className="flex items-center gap-3 rounded-xl border border-border bg-surface px-5 py-4 shadow-sm">
+        <CheckCircle2 className="h-5 w-5 text-success shrink-0" aria-hidden="true" />
         <p className="text-sm font-medium text-foreground">
           Estoque OK — nenhum alerta no momento
         </p>
@@ -74,14 +74,14 @@ function AlertWidget() {
   const remaining = alerts.length - MAX_SHOWN
 
   return (
-    <div className="rounded-xl border border-border bg-white shadow-sm overflow-hidden">
+    <div className="rounded-xl border border-border bg-surface shadow-sm overflow-hidden">
       {/* Cabeçalho */}
       <div className="flex items-center justify-between px-5 py-4 border-b border-border">
         <div className="flex items-center gap-2">
-          <AlertTriangle className="h-4 w-4 text-amber-500" aria-hidden="true" />
+          <AlertTriangle className="h-4 w-4 text-warning" aria-hidden="true" />
           <p className="text-sm font-semibold text-foreground">Alertas de Estoque</p>
         </div>
-        <span className="flex h-6 min-w-[1.5rem] items-center justify-center rounded-full bg-brand-100 text-xs font-bold text-brand-700 px-2">
+        <span className="flex h-6 min-w-[1.5rem] items-center justify-center rounded-full bg-accent text-xs font-bold text-accent-foreground px-2">
           {alerts.length}
         </span>
       </div>
@@ -93,7 +93,7 @@ function AlertWidget() {
             {item.status === 'OUT' ? (
               <XCircle className="h-4 w-4 text-destructive shrink-0" aria-hidden="true" />
             ) : (
-              <AlertTriangle className="h-4 w-4 text-amber-500 shrink-0" aria-hidden="true" />
+              <AlertTriangle className="h-4 w-4 text-warning shrink-0" aria-hidden="true" />
             )}
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium text-foreground truncate">
@@ -125,7 +125,7 @@ function AlertWidget() {
       <div className="px-5 py-3 border-t border-border bg-muted/20">
         <Link
           href="/estoque"
-          className="text-sm font-medium text-brand-600 hover:text-brand-700 transition-colors"
+          className="text-sm font-medium text-accent-foreground hover:text-accent-foreground transition-colors"
         >
           Ver estoque completo →
         </Link>

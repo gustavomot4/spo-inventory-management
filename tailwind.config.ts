@@ -12,6 +12,27 @@ const config: Config = {
       // Cores da marca — Pimenta Ousada (pink/rose)
       // -----------------------------------------------------------------
       colors: {
+        surface: 'rgb(var(--surface) / <alpha-value>)',
+        accent: {
+          DEFAULT: 'rgb(var(--accent) / <alpha-value>)',
+          foreground: 'rgb(var(--accent-foreground) / <alpha-value>)',
+          border: 'rgb(var(--accent-border) / <alpha-value>)',
+        },
+        success: {
+          DEFAULT: 'rgb(var(--success) / <alpha-value>)',
+          muted: 'rgb(var(--success-muted) / <alpha-value>)',
+          border: 'rgb(var(--success-border) / <alpha-value>)',
+        },
+        warning: {
+          DEFAULT: 'rgb(var(--warning) / <alpha-value>)',
+          muted: 'rgb(var(--warning-muted) / <alpha-value>)',
+          border: 'rgb(var(--warning-border) / <alpha-value>)',
+        },
+        danger: {
+          solid: 'rgb(var(--danger-solid) / <alpha-value>)',
+          muted: 'rgb(var(--danger-muted) / <alpha-value>)',
+          border: 'rgb(var(--danger-border) / <alpha-value>)',
+        },
         brand: {
           50:  '#fdf2f8',
           100: '#fce7f3',
@@ -43,6 +64,7 @@ const config: Config = {
         },
         primary: {
           DEFAULT:    'rgb(var(--primary) / <alpha-value>)',
+          hover:      'rgb(var(--primary-hover) / <alpha-value>)',
           foreground: 'rgb(var(--primary-foreground) / <alpha-value>)',
         },
       },

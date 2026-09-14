@@ -95,8 +95,8 @@ function SummaryCard({
   return (
     <div
       className={cn(
-        'rounded-xl border border-border bg-white p-4 flex flex-col gap-3',
-        accent && 'border-brand-200 bg-brand-50/30'
+        'rounded-xl border border-border bg-surface p-4 flex flex-col gap-3',
+        accent && 'border-accent-border bg-accent/30'
       )}
     >
       <div className="flex items-center justify-between">
@@ -106,13 +106,13 @@ function SummaryCard({
         <div
           className={cn(
             'flex h-7 w-7 items-center justify-center rounded-lg',
-            accent ? 'bg-brand-100' : 'bg-muted'
+            accent ? 'bg-accent' : 'bg-muted'
           )}
         >
           <Icon
             className={cn(
               'h-3.5 w-3.5',
-              accent ? 'text-brand-600' : 'text-muted-foreground'
+              accent ? 'text-accent-foreground' : 'text-muted-foreground'
             )}
             aria-hidden="true"
           />
@@ -122,7 +122,7 @@ function SummaryCard({
         <p
           className={cn(
             'text-2xl font-bold tracking-tight',
-            accent ? 'text-brand-700' : 'text-foreground'
+            accent ? 'text-accent-foreground' : 'text-foreground'
           )}
         >
           {value}
@@ -142,7 +142,7 @@ function SummaryCard({
 function StockStatusBadge({ status }: { status: 'ok' | 'low' | 'out' }) {
   if (status === 'ok') {
     return (
-      <span className="inline-flex items-center gap-1 text-xs font-medium text-green-700">
+      <span className="inline-flex items-center gap-1 text-xs font-medium text-success">
         <CheckCircle2 className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
         OK
       </span>
@@ -150,14 +150,14 @@ function StockStatusBadge({ status }: { status: 'ok' | 'low' | 'out' }) {
   }
   if (status === 'low') {
     return (
-      <span className="inline-flex items-center gap-1 text-xs font-medium text-amber-600">
+      <span className="inline-flex items-center gap-1 text-xs font-medium text-warning">
         <AlertTriangle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
         Alerta
       </span>
     )
   }
   return (
-    <span className="inline-flex items-center gap-1 text-xs font-medium text-red-600">
+    <span className="inline-flex items-center gap-1 text-xs font-medium text-destructive">
       <XCircle className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
       Zerado
     </span>
@@ -220,7 +220,7 @@ function StockTab() {
       <div className="flex items-center justify-center py-20">
         <div className="flex flex-col items-center gap-3">
           <div
-            className="h-6 w-6 animate-spin rounded-full border-2 border-brand-600 border-t-transparent"
+            className="h-6 w-6 animate-spin rounded-full border-2 border-ring border-t-transparent"
             aria-hidden="true"
           />
           <p className="text-sm text-muted-foreground">Carregando estoque...</p>
@@ -237,7 +237,7 @@ function StockTab() {
         <button
           type="button"
           onClick={() => setLoaded(false)}
-          className="text-xs text-brand-600 underline underline-offset-2"
+          className="text-xs text-accent-foreground underline underline-offset-2"
         >
           Tentar novamente
         </button>
@@ -249,7 +249,7 @@ function StockTab() {
     <div className="space-y-6">
       {/* QA-052: aviso de truncamento se o limite de 2000 variações for atingido */}
       {items.length >= 2000 && (
-        <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm text-amber-800">
+        <div className="rounded-lg border border-warning-border bg-warning-muted px-4 py-2.5 text-sm text-warning">
           Exibindo os primeiros 2.000 resultados. Filtre por categoria para ver todos os itens.
         </div>
       )}
@@ -308,8 +308,8 @@ function StockTab() {
             className={cn(
               'rounded-full px-3.5 py-1 text-xs font-medium transition-colors border',
               statusFilter === opt.value
-                ? 'bg-foreground text-white border-foreground'
-                : 'bg-white text-muted-foreground border-border hover:border-foreground/30 hover:text-foreground'
+                ? 'bg-foreground text-background border-foreground'
+                : 'bg-surface text-muted-foreground border-border hover:border-foreground/30 hover:text-foreground'
             )}
           >
             {opt.label}
@@ -326,7 +326,7 @@ function StockTab() {
           <p className="mt-1 text-xs text-muted-foreground">Tente outro filtro de status.</p>
         </div>
       ) : (
-        <div className="overflow-x-auto rounded-xl border border-border bg-white">
+        <div className="overflow-x-auto rounded-xl border border-border bg-surface">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border bg-muted/40">
@@ -346,8 +346,8 @@ function StockTab() {
                   key={item.variationId}
                   className={cn(
                     'border-b border-border last:border-0 transition-colors',
-                    item.status === 'out' && 'bg-red-50/40',
-                    item.status === 'low' && 'bg-amber-50/30'
+                    item.status === 'out' && 'bg-danger-muted/40',
+                    item.status === 'low' && 'bg-warning-muted/30'
                   )}
                 >
                   <td className="px-4 py-3">
@@ -366,8 +366,8 @@ function StockTab() {
                   <td className="px-4 py-3 text-right">
                     <span className={cn(
                       'text-sm font-semibold',
-                      item.status === 'out' && 'text-red-600',
-                      item.status === 'low' && 'text-amber-600',
+                      item.status === 'out' && 'text-destructive',
+                      item.status === 'low' && 'text-warning',
                       item.status === 'ok' && 'text-foreground'
                     )}>
                       {item.stockQuantity}
@@ -393,7 +393,8 @@ function StockTab() {
 // Cores do PieChart
 // ---------------------------------------------------------------------------
 
-const PIE_COLORS = ['#e11d70', '#f59e0b', '#3b82f6', '#10b981']
+const PIE_COLORS = [1, 2, 3, 4].map(index => `rgb(var(--chart-${index}))`)
+const TOOLTIP_STYLE = { fontSize: '0.75rem', borderRadius: 8, backgroundColor: 'rgb(var(--surface))', borderColor: 'rgb(var(--border))', color: 'rgb(var(--foreground))' }
 
 // ---------------------------------------------------------------------------
 // Top 5 Variações com ordenação
@@ -433,7 +434,7 @@ function TopVariationsSection({ variations }: { variations: import('@/types').To
               className={cn(
                 'rounded-md px-3 py-1 text-xs font-medium transition-all',
                 sort === opt.value
-                  ? 'bg-white text-foreground shadow-sm'
+                  ? 'bg-surface text-foreground shadow-sm'
                   : 'text-muted-foreground hover:text-foreground'
               )}
             >
@@ -442,7 +443,7 @@ function TopVariationsSection({ variations }: { variations: import('@/types').To
           ))}
         </div>
       </div>
-      <div className="overflow-x-auto rounded-xl border border-border bg-white">
+      <div className="overflow-x-auto rounded-xl border border-border bg-surface">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-border bg-muted/40">
@@ -460,9 +461,9 @@ function TopVariationsSection({ variations }: { variations: import('@/types').To
                 <td className="px-4 py-3">
                   <span className={cn(
                     'text-xs font-bold',
-                    idx === 0 && 'text-amber-500',
+                    idx === 0 && 'text-warning',
                     idx === 1 && 'text-zinc-400',
-                    idx === 2 && 'text-amber-700',
+                    idx === 2 && 'text-warning',
                     idx > 2 && 'text-muted-foreground'
                   )}>
                     {idx + 1}
@@ -482,7 +483,7 @@ function TopVariationsSection({ variations }: { variations: import('@/types').To
                 <td className="px-4 py-3 text-right font-medium text-foreground">{formatCurrency(v.revenueCents)}</td>
                 <td className="px-4 py-3 text-right text-sm">
                   {v.estimatedProfitCents !== null ? (
-                    <span className={v.estimatedProfitCents >= 0 ? 'font-medium text-green-600' : 'font-medium text-destructive'}>
+                    <span className={v.estimatedProfitCents >= 0 ? 'font-medium text-success' : 'font-medium text-destructive'}>
                       {formatCurrency(v.estimatedProfitCents)}
                     </span>
                   ) : (
@@ -571,8 +572,8 @@ function SalesTab() {
               className={cn(
                 'rounded-full px-3.5 py-1 text-xs font-medium transition-colors border',
                 period === p
-                  ? 'bg-foreground text-white border-foreground'
-                  : 'bg-white text-muted-foreground border-border hover:border-foreground/30 hover:text-foreground'
+                  ? 'bg-foreground text-background border-foreground'
+                  : 'bg-surface text-muted-foreground border-border hover:border-foreground/30 hover:text-foreground'
               )}
             >
               {PERIOD_LABELS[p]}
@@ -588,7 +589,7 @@ function SalesTab() {
                 type="date"
                 value={customFrom}
                 onChange={e => setCustomFrom(e.target.value)}
-                className="rounded-lg border border-border bg-white px-3 py-1.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
               />
             </div>
             <div className="flex flex-col gap-1">
@@ -597,7 +598,7 @@ function SalesTab() {
                 type="date"
                 value={customTo}
                 onChange={e => setCustomTo(e.target.value)}
-                className="rounded-lg border border-border bg-white px-3 py-1.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                className="rounded-lg border border-border bg-surface px-3 py-1.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring"
               />
             </div>
             <Button size="sm" onClick={handleCustomApply} disabled={!customFrom || !customTo}>
@@ -615,7 +616,7 @@ function SalesTab() {
           <button
             type="button"
             onClick={() => { const range = period !== 'custom' ? getDateRange(period) : { dateFrom: customFrom, dateTo: customTo }; if (range.dateFrom && range.dateTo) loadSales(range.dateFrom, range.dateTo) }}
-            className="text-xs text-brand-600 underline underline-offset-2"
+            className="text-xs text-accent-foreground underline underline-offset-2"
           >
             Tentar novamente
           </button>
@@ -626,7 +627,7 @@ function SalesTab() {
         <div className="flex items-center justify-center py-20">
           <div className="flex flex-col items-center gap-3">
             <div
-              className="h-6 w-6 animate-spin rounded-full border-2 border-brand-600 border-t-transparent"
+              className="h-6 w-6 animate-spin rounded-full border-2 border-ring border-t-transparent"
               aria-hidden="true"
             />
             <p className="text-sm text-muted-foreground">Carregando relatorio...</p>
@@ -638,7 +639,7 @@ function SalesTab() {
         <div className="space-y-8">
           {/* QA-053: aviso de truncamento — relatorio calculado sobre amostra parcial */}
           {summary!.truncated && (
-            <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm text-amber-800" role="alert">
+            <div className="rounded-lg border border-warning-border bg-warning-muted px-4 py-2.5 text-sm text-warning" role="alert">
               Este periodo tem {summary!.totalSalesInPeriod.toLocaleString('pt-BR')} vendas, acima do limite de 5.000.
               Os totais abaixo consideram apenas parte das vendas e estao subestimados.
               Reduza o intervalo de datas para ver numeros completos.
@@ -691,7 +692,7 @@ function SalesTab() {
             </div>
           )}
           {summary!.estimatedProfitCents === null && (
-            <div className="rounded-xl border border-dashed border-border bg-white/50 px-4 py-3 text-xs text-muted-foreground">
+            <div className="rounded-xl border border-dashed border-border bg-surface/50 px-4 py-3 text-xs text-muted-foreground">
               Cadastre o <strong>preco de custo</strong> nos produtos em{' '}
               <strong>Cadastro de Produtos</strong> para ver lucro e margem estimados.
             </div>
@@ -701,7 +702,7 @@ function SalesTab() {
           {summary!.estimatedProfitCents !== null &&
             summary!.costCoveragePct !== null &&
             summary!.costCoveragePct < 100 && (
-            <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-2.5 text-sm text-amber-800" role="alert">
+            <div className="rounded-lg border border-warning-border bg-warning-muted px-4 py-2.5 text-sm text-warning" role="alert">
               Apenas {summary!.costCoveragePct}% dos itens vendidos tem preco de custo cadastrado.
               O lucro e a margem acima estao <strong>superestimados</strong> — cadastre o custo
               nos demais produtos para ver numeros completos.
@@ -724,7 +725,7 @@ function SalesTab() {
               {data.byPaymentMethod.length > 0 && (
                 <section>
                   <h2 className="mb-3 text-sm font-semibold text-foreground">Por metodo de pagamento</h2>
-                  <div className="rounded-xl border border-border bg-white p-4">
+                  <div className="rounded-xl border border-border bg-surface p-4">
                     <div className="flex flex-col sm:flex-row items-center gap-6">
                       <div className="w-full sm:w-48 shrink-0">
                         <ResponsiveContainer width="100%" height={180}>
@@ -736,6 +737,7 @@ function SalesTab() {
                               innerRadius={50}
                               outerRadius={80}
                               paddingAngle={3}
+                              stroke="rgb(var(--surface))"
                               dataKey="value"
                             >
                               {data.byPaymentMethod.map((_, idx) => (
@@ -744,12 +746,13 @@ function SalesTab() {
                             </Pie>
                             <Tooltip
                               formatter={(v) => 'R$ ' + Number(v).toFixed(2)}
-                              contentStyle={{ fontSize: 12, borderRadius: 8 }}
+                              contentStyle={TOOLTIP_STYLE}
+                              itemStyle={{ color: 'rgb(var(--foreground))' }}
                             />
                           </PieChart>
                         </ResponsiveContainer>
                       </div>
-                      <div className="flex-1 w-full">
+                      <div className="flex-1 w-full min-w-0 overflow-x-auto">
                         <table className="w-full text-sm">
                           <thead>
                             <tr className="border-b border-border">
@@ -795,7 +798,7 @@ function SalesTab() {
               {data.byDay.length > 0 && (
                 <section>
                   <h2 className="mb-3 text-sm font-semibold text-foreground no-print">Receita por dia</h2>
-                  <div className="rounded-xl border border-border bg-white p-4">
+                  <div className="rounded-xl border border-border bg-surface p-4">
                     <ResponsiveContainer width="100%" height={220}>
                       <BarChart
                         data={data.byDay.map(d => ({
@@ -805,20 +808,22 @@ function SalesTab() {
                         }))}
                         margin={{ top: 4, right: 8, left: 8, bottom: 4 }}
                       >
-                        <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
-                        <XAxis dataKey="date" tick={{ fontSize: 11 }} tickLine={false} axisLine={false} />
+                        <CartesianGrid strokeDasharray="3 3" stroke="rgb(var(--border))" />
+                        <XAxis dataKey="date" tick={{ fontSize: '0.6875rem', fill: 'rgb(var(--muted-foreground))' }} tickLine={false} axisLine={false} />
                         <YAxis
-                          tick={{ fontSize: 11 }}
+                          tick={{ fontSize: '0.6875rem', fill: 'rgb(var(--muted-foreground))' }}
                           tickLine={false}
                           axisLine={false}
                           tickFormatter={(v: number) => 'R$' + v.toFixed(0)}
                         />
                         <Tooltip
+                          cursor={{ fill: 'rgb(var(--muted))' }}
                           formatter={(value) => ['R$ ' + Number(value).toFixed(2), 'Receita']}
-                          labelStyle={{ fontSize: 12 }}
-                          contentStyle={{ fontSize: 12, borderRadius: 8 }}
+                          labelStyle={{ fontSize: '0.75rem', color: 'rgb(var(--foreground))' }}
+                          contentStyle={TOOLTIP_STYLE}
+                              itemStyle={{ color: 'rgb(var(--foreground))' }}
                         />
-                        <Bar dataKey="receita" fill="#e11d70" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="receita" fill="rgb(var(--chart-1))" radius={[4, 4, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
@@ -873,7 +878,7 @@ export default function RelatoriosPage() {
           className={cn(
             'rounded-lg px-4 py-1.5 text-sm font-medium transition-all',
             activeTab === 'stock'
-              ? 'bg-white text-foreground shadow-sm'
+              ? 'bg-surface text-foreground shadow-sm'
               : 'text-muted-foreground hover:text-foreground'
           )}
         >
@@ -884,7 +889,7 @@ export default function RelatoriosPage() {
           className={cn(
             'rounded-lg px-4 py-1.5 text-sm font-medium transition-all',
                      activeTab === 'sales'
-              ? 'bg-white text-foreground shadow-sm'
+              ? 'bg-surface text-foreground shadow-sm'
               : 'text-muted-foreground hover:text-foreground'
           )}
         >

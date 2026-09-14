@@ -52,7 +52,7 @@ function SaleRow({ sale }: { sale: SaleListItem }) {
       <div>
         <p className="text-xs text-foreground">{formatDateTime(new Date(sale.createdAt)).split(',')[0]}</p>
         <p className="text-xs text-muted-foreground">{formatDateTime(new Date(sale.createdAt)).split(',')[1]}</p>
-        <p className="text-[10px] font-mono text-muted-foreground/70">#{sale.id.slice(0, 8).toUpperCase()}</p>
+        <p className="text-[0.625rem] font-mono text-muted-foreground/70">#{sale.id.slice(0, 8).toUpperCase()}</p>
       </div>
       <p className="text-sm text-foreground">{sale.paymentMethodLabel}</p>
       <p className="text-sm text-muted-foreground text-center">{sale.itemCount} it.</p>
@@ -173,7 +173,7 @@ export default function VendasPage() {
       {/* Filtros */}
       <div className="flex flex-col sm:flex-row gap-3 mb-5">
         {/* Período */}
-        <div className="flex items-center gap-1 rounded-lg border border-border bg-white p-1">
+        <div className="flex items-center gap-1 rounded-lg border border-border bg-surface p-1">
           {(Object.keys(PERIOD_LABELS) as PeriodFilter[]).map(p => (
             <button
               key={p}
@@ -217,7 +217,7 @@ export default function VendasPage() {
       </div>
 
       {/* Lista */}
-      <div className="bg-white rounded-xl border border-border shadow-sm overflow-hidden">
+      <div className="bg-surface rounded-xl border border-border shadow-sm overflow-hidden">
         {/* Header */}
         <div className="hidden sm:grid grid-cols-[7rem_1fr_4rem_8rem_7rem] gap-3 px-5 py-2.5 border-b border-border bg-muted/30">
           {['Data/hora', 'Método', 'Itens', 'Total', 'Status'].map(h => (

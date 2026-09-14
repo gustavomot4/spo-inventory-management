@@ -215,7 +215,7 @@ function CardMachineRow({ machine, onToggleActive, onUpdate }: CardMachineRowPro
   if (editing) {
     return (
       <div className={cn(
-        'border-b border-border last:border-0 px-6 py-4 bg-brand-50/30',
+        'border-b border-border last:border-0 px-6 py-4 bg-accent/30',
         !machine.isActive && 'opacity-60'
       )}>
         <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-end gap-3">
@@ -312,7 +312,7 @@ function CardMachineRow({ machine, onToggleActive, onUpdate }: CardMachineRowPro
                   variant="destructive"
                   loading={toggling}
                   onClick={handleToggle}
-                  className="h-6 px-2 text-[10px]"
+                  className="h-6 px-2 text-[0.625rem]"
                 >
                   Sim
                 </Button>
@@ -369,7 +369,7 @@ function CardMachineRow({ machine, onToggleActive, onUpdate }: CardMachineRowPro
               <div className="flex items-center gap-3 text-xs">
                 <span className="w-12 text-muted-foreground font-medium">1× à vista</span>
                 <span className="text-foreground">{formatBasisPoints(machine.feeBasisPoints)}</span>
-                <span className="text-muted-foreground text-[10px]">(taxa crédito à vista)</span>
+                <span className="text-muted-foreground text-[0.625rem]">(taxa crédito à vista)</span>
               </div>
               {/* Parcelamentos cadastrados */}
               {installments.map(inst => (
@@ -385,7 +385,7 @@ function CardMachineRow({ machine, onToggleActive, onUpdate }: CardMachineRowPro
                         placeholder="2,99"
                         autoFocus
                       />
-                      <Button size="sm" loading={savingInst} onClick={() => handleSaveInstallment(inst.id)} className="h-6 px-2 text-[10px]">OK</Button>
+                      <Button size="sm" loading={savingInst} onClick={() => handleSaveInstallment(inst.id)} className="h-6 px-2 text-[0.625rem]">OK</Button>
                       <Button size="sm" variant="ghost" onClick={() => setEditingInstId(null)} className="h-6 px-1">
                         <X className="h-3 w-3" />
                       </Button>
@@ -393,8 +393,8 @@ function CardMachineRow({ machine, onToggleActive, onUpdate }: CardMachineRowPro
                   ) : confirmDeleteInstId === inst.id ? (
                     <>
                       <span className="text-destructive">Remover {inst.installments}×?</span>
-                      <Button size="sm" variant="destructive" loading={deletingInstId === inst.id} onClick={() => handleDeleteInstallment(inst.id)} className="h-6 px-2 text-[10px]">Sim</Button>
-                      <Button size="sm" variant="ghost" onClick={() => setConfirmDeleteInstId(null)} className="h-6 px-1 text-[10px]">Não</Button>
+                      <Button size="sm" variant="destructive" loading={deletingInstId === inst.id} onClick={() => handleDeleteInstallment(inst.id)} className="h-6 px-2 text-[0.625rem]">Sim</Button>
+                      <Button size="sm" variant="ghost" onClick={() => setConfirmDeleteInstId(null)} className="h-6 px-1 text-[0.625rem]">Não</Button>
                     </>
                   ) : (
                     <>
@@ -771,7 +771,7 @@ export default function ConfiguracoesPage() {
           <h1 className="text-2xl font-bold tracking-tight text-foreground">Configurações</h1>
           <p className="text-sm text-muted-foreground mt-1">Gerencie maquininhas e preferências da loja</p>
         </div>
-        <span className="inline-flex items-center gap-1.5 text-xs font-medium text-amber-700 bg-amber-50 border border-amber-200 rounded-full px-3 py-1">
+        <span className="inline-flex items-center gap-1.5 text-xs font-medium text-warning bg-warning-muted border border-warning-border rounded-full px-3 py-1">
           <Lock className="h-3 w-3" strokeWidth={2} />
           Área protegida
         </span>
@@ -782,11 +782,11 @@ export default function ConfiguracoesPage() {
         <p className="mb-3 text-xs font-medium uppercase tracking-widest text-muted-foreground">
           Categorias de Produto
         </p>
-        <div className="bg-white rounded-xl border border-border shadow-sm overflow-hidden">
+        <div className="bg-surface rounded-xl border border-border shadow-sm overflow-hidden">
           {/* Formulario de adicao */}
           <div className="px-6 py-4 border-b border-border bg-muted/30">
             <p className="text-sm font-medium text-foreground mb-3 flex items-center gap-2">
-              <Plus className="h-4 w-4 text-brand-600" />
+              <Plus className="h-4 w-4 text-accent-foreground" />
               Adicionar categoria
             </p>
             <div className="flex items-end gap-3">
@@ -831,7 +831,7 @@ export default function ConfiguracoesPage() {
             <div>
               {categories.map(cat => (
                 editingCatId === cat.id ? (
-                  <div key={cat.id} className="border-b border-border last:border-0 px-6 py-4 bg-brand-50/30 flex items-end gap-3">
+                  <div key={cat.id} className="border-b border-border last:border-0 px-6 py-4 bg-accent/30 flex items-end gap-3">
                     <div className="flex-1">
                       <Input
                         label="Nome"
@@ -869,7 +869,7 @@ export default function ConfiguracoesPage() {
                           <div className="flex items-center gap-1">
                             <span className="text-xs text-muted-foreground">Inativar?</span>
                             <Button size="sm" variant="destructive" loading={togglingCat === cat.id}
-                              onClick={() => handleToggleCategory(cat.id, true)} className="h-6 px-2 text-[10px]">
+                              onClick={() => handleToggleCategory(cat.id, true)} className="h-6 px-2 text-[0.625rem]">
                               Sim
                             </Button>
                             <Button size="sm" variant="ghost" onClick={() => setConfirmInactivateCat(null)} className="h-6 px-1">
@@ -902,11 +902,11 @@ export default function ConfiguracoesPage() {
         <p className="mb-3 text-xs font-medium uppercase tracking-widest text-muted-foreground">
           Maquininhas de Cartão
         </p>
-        <div className="bg-white rounded-xl border border-border shadow-sm overflow-hidden">
+        <div className="bg-surface rounded-xl border border-border shadow-sm overflow-hidden">
           {/* Formulário de adição */}
           <div className="px-6 py-4 border-b border-border bg-muted/30">
             <p className="text-sm font-medium text-foreground mb-3 flex items-center gap-2">
-              <Plus className="h-4 w-4 text-brand-600" />
+              <Plus className="h-4 w-4 text-accent-foreground" />
               Adicionar maquininha
             </p>
             <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-end gap-3">
@@ -994,9 +994,9 @@ export default function ConfiguracoesPage() {
         <p className="mb-3 text-xs font-medium uppercase tracking-widest text-muted-foreground">
           Dados da Loja
         </p>
-        <div className="bg-white rounded-xl border border-border shadow-sm p-6">
+        <div className="bg-surface rounded-xl border border-border shadow-sm p-6">
           <div className="flex items-center gap-2 mb-4">
-            <Store className="h-4 w-4 text-brand-600" />
+            <Store className="h-4 w-4 text-accent-foreground" />
             <p className="text-sm font-medium text-foreground">Informações exibidas na comanda</p>
           </div>
           <div className="space-y-4">
@@ -1021,7 +1021,7 @@ export default function ConfiguracoesPage() {
           </div>
           {settingsError && <p className="mt-3 text-xs text-destructive">{settingsError}</p>}
           {settingsSaved && (
-            <p className="mt-3 text-xs text-green-600 font-medium flex items-center gap-1">
+            <p className="mt-3 text-xs text-success font-medium flex items-center gap-1">
               <Check className="h-3.5 w-3.5" /> Dados salvos com sucesso!
             </p>
           )}
@@ -1038,9 +1038,9 @@ export default function ConfiguracoesPage() {
         <p className="mb-3 text-xs font-medium uppercase tracking-widest text-muted-foreground">
           Seguranca
         </p>
-        <div className="bg-white rounded-xl border border-border shadow-sm p-6">
+        <div className="bg-surface rounded-xl border border-border shadow-sm p-6">
           <div className="flex items-center gap-2 mb-5">
-            <Lock className="h-4 w-4 text-brand-600" />
+            <Lock className="h-4 w-4 text-accent-foreground" />
             <p className="text-sm font-medium text-foreground">Alterar PIN de acesso</p>
           </div>
 
@@ -1048,9 +1048,9 @@ export default function ConfiguracoesPage() {
               Sem PIN proprio, qualquer pessoa que conheca o padrao acessa
               relatorios e configuracoes. */}
           {pinConfigured === false && (
-            <div className="mb-5 flex items-start gap-2.5 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3" role="alert">
-              <AlertTriangle className="h-4 w-4 text-amber-600 shrink-0 mt-0.5" aria-hidden="true" />
-              <p className="text-xs text-amber-800 leading-relaxed">
+            <div className="mb-5 flex items-start gap-2.5 rounded-lg border border-warning-border bg-warning-muted px-4 py-3" role="alert">
+              <AlertTriangle className="h-4 w-4 text-warning shrink-0 mt-0.5" aria-hidden="true" />
+              <p className="text-xs text-warning leading-relaxed">
                 O sistema ainda esta usando o <strong>PIN padrao (1234)</strong>, que e
                 publico. Defina um PIN so seu abaixo — no campo &quot;PIN atual&quot;,
                 digite <strong>1234</strong>.
@@ -1095,7 +1095,7 @@ export default function ConfiguracoesPage() {
             <p className="mt-3 text-xs text-destructive">{pinError.general}</p>
           )}
           {pinSaved && (
-            <p className="mt-3 text-xs text-green-600 font-medium flex items-center gap-1">
+            <p className="mt-3 text-xs text-success font-medium flex items-center gap-1">
               <Check className="h-3.5 w-3.5" /> PIN alterado com sucesso!
             </p>
           )}
