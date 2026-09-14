@@ -1,3 +1,9 @@
+# Nome do projeto FIXO: sem isto o Compose deriva o nome da pasta, e renomear a
+# pasta (ex.: SPO_inventory_management -> spo-inventory-management) cria um
+# "projeto novo" que colide com os container_name fixos abaixo ("name already
+# in use") e faz o update do spo-updater cair em rollback.
+name: spo_inventory_management
+
 services:
   spo:
     # GITOPS-003: a loja roda IMAGEM PRE-CONSTRUIDA do GHCR, com versao PINADA.
