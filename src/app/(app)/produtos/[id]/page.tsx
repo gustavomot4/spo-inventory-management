@@ -161,7 +161,7 @@ function VariationRow({ variation, onUpdate, onDeactivate }: VariationRowProps) 
             disabled={!variation.isActive}
             className={cn(
               'text-xs text-muted-foreground border border-dashed border-border rounded px-2 py-1',
-              variation.isActive && 'hover:border-brand-300 hover:text-brand-700 transition-colors cursor-pointer'
+              variation.isActive && 'hover:border-accent-border hover:text-accent-foreground transition-colors cursor-pointer'
             )}
             title="Editar estoque mínimo"
           >
@@ -184,7 +184,7 @@ function VariationRow({ variation, onUpdate, onDeactivate }: VariationRowProps) 
                 variant="destructive"
                 loading={deactivating}
                 onClick={handleDeactivate}
-                className="h-6 px-2 text-[10px]"
+                className="h-6 px-2 text-[0.625rem]"
               >
                 Sim
               </Button>
@@ -500,7 +500,7 @@ export default function ProdutoDetalhePage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <Loader2 className="h-6 w-6 text-brand-600 animate-spin" />
+        <Loader2 className="h-6 w-6 text-accent-foreground animate-spin" />
       </div>
     )
   }
@@ -561,7 +561,7 @@ export default function ProdutoDetalhePage() {
       </div>
 
       {/* ── Dados do produto ── */}
-      <div className="bg-white rounded-xl border border-border shadow-sm overflow-hidden mb-5">
+      <div className="bg-surface rounded-xl border border-border shadow-sm overflow-hidden mb-5">
         <div className="px-6 py-4 border-b border-border">
           <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
             Dados do Produto
@@ -624,7 +624,7 @@ export default function ProdutoDetalhePage() {
               Salvar alterações
             </Button>
             {savedProduct && (
-              <span className="text-xs text-green-600 font-medium flex items-center gap-1">
+              <span className="text-xs text-success font-medium flex items-center gap-1">
                 <CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" /> Salvo!
               </span>
             )}
@@ -633,7 +633,7 @@ export default function ProdutoDetalhePage() {
       </div>
 
       {/* ── Variações ── */}
-      <div className="bg-white rounded-xl border border-border shadow-sm overflow-hidden mb-5">
+      <div className="bg-surface rounded-xl border border-border shadow-sm overflow-hidden mb-5">
         <div className="px-6 py-4 border-b border-border flex items-center justify-between">
           <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
             Variações ({product.variations.filter(v => v.isActive).length} ativas)
@@ -652,7 +652,7 @@ export default function ProdutoDetalhePage() {
 
         {/* Formulário nova variação */}
         {showAddVar && (
-          <div className="px-6 py-4 border-b border-border bg-brand-50/30">
+          <div className="px-6 py-4 border-b border-border bg-accent/30">
             <p className="text-xs font-medium text-foreground mb-3">Nova variação</p>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
               <Input
@@ -726,7 +726,7 @@ export default function ProdutoDetalhePage() {
 
       {/* ── Reativar produto (quando inativo) ── */}
       {!product.isActive && (
-        <div className="bg-white rounded-xl border border-border shadow-sm overflow-hidden mb-5">
+        <div className="bg-surface rounded-xl border border-border shadow-sm overflow-hidden mb-5">
           <div className="px-6 py-4 border-b border-border">
             <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
               Produto Inativo
@@ -756,7 +756,7 @@ export default function ProdutoDetalhePage() {
 
       {/* ── Zona de perigo ── */}
       {product.isActive && (
-        <div className="bg-white rounded-xl border border-border shadow-sm overflow-hidden">
+        <div className="bg-surface rounded-xl border border-border shadow-sm overflow-hidden">
           <div className="px-6 py-4 border-b border-border">
             <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
               Zona de Perigo

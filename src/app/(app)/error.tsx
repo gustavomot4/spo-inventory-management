@@ -35,7 +35,7 @@ export default function Error({
       </div>
       <button
         onClick={reset}
-        className="rounded-lg border border-border bg-white px-4 py-2 text-sm font-medium text-foreground hover:bg-muted transition-colors"
+        className="rounded-lg border border-border bg-surface px-4 py-2 text-sm font-medium text-foreground hover:bg-muted transition-colors"
       >
         Tentar novamente
       </button>

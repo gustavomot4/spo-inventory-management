@@ -31,7 +31,7 @@ function Comanda({ sale, settings }: { sale: SaleResponse; settings: SettingsRes
   const dateStr = formatDateTime(new Date(sale.createdAt))
 
   return (
-    <div className="max-w-[320px] mx-auto font-mono text-[11px] leading-relaxed bg-white rounded-xl border border-border shadow-sm p-5 print-only">
+    <div className="receipt max-w-[24rem] mx-auto break-words font-mono text-[0.6875rem] leading-relaxed bg-surface rounded-xl border border-border shadow-sm p-5 print-only">
       {/* Cabeçalho da loja */}
       <div className="text-center mb-3">
         <p className="font-bold text-sm uppercase tracking-wide">{settings?.shopName ?? 'Pimenta Ousada'}</p>
@@ -39,7 +39,7 @@ function Comanda({ sale, settings }: { sale: SaleResponse; settings: SettingsRes
         {settings?.phone && <p className="text-xs">{settings.phone}</p>}
       </div>
 
-      <p className="border-t border-dashed border-gray-400 my-2" />
+      <p className="border-t border-dashed border-input my-2" />
 
       {/* Identificação da venda */}
       <div className="text-center mb-2">
@@ -50,15 +50,15 @@ function Comanda({ sale, settings }: { sale: SaleResponse; settings: SettingsRes
         )}
       </div>
 
-      <p className="border-t border-dashed border-gray-400 my-2" />
+      <p className="border-t border-dashed border-input my-2" />
 
       {/* Itens */}
       <div className="space-y-2 mb-2">
         {sale.items.map(item => (
-          <div key={item.id}>
+          <div key={item.id} className="receipt-item">
             <p className="font-medium">{item.productName}</p>
             {(item.size || item.color) && (
-              <p className="text-gray-600">{variationDesc(item.size, item.color, item.variationSku)}</p>
+              <p className="text-muted-foreground">{variationDesc(item.size, item.color, item.variationSku)}</p>
             )}
             <div className="flex justify-between">
               <span>{item.quantity} x {formatCurrency(item.unitPriceCents)}</span>
@@ -68,7 +68,7 @@ function Comanda({ sale, settings }: { sale: SaleResponse; settings: SettingsRes
         ))}
       </div>
 
-      <p className="border-t border-dashed border-gray-400 my-2" />
+      <p className="border-t border-dashed border-input my-2" />
 
       {/* Totais */}
       <div className="space-y-0.5 mb-2">
@@ -82,13 +82,13 @@ function Comanda({ sale, settings }: { sale: SaleResponse; settings: SettingsRes
             <span>-{formatCurrency(sale.discountCents)}</span>
           </div>
         )}
-        <div className="flex justify-between font-bold text-[13px] pt-0.5">
+        <div className="flex justify-between font-bold text-[0.8125rem] pt-0.5">
           <span>TOTAL</span>
           <span>{formatCurrency(sale.totalCents)}</span>
         </div>
       </div>
 
-      <p className="border-t border-dashed border-gray-400 my-2" />
+      <p className="border-t border-dashed border-input my-2" />
 
       {/* Pagamento — maquininha e taxa omitidos intencionalmente (dado interno) */}
       <p className="mb-1">
@@ -96,14 +96,14 @@ function Comanda({ sale, settings }: { sale: SaleResponse; settings: SettingsRes
         {sale.installments > 1 && ` — ${sale.installments}×`}
       </p>
 
-      <p className="border-t border-dashed border-gray-400 my-3" />
+      <p className="border-t border-dashed border-input my-3" />
 
       {/* Rodapé */}
       <div className="text-center">
         <p>Obrigada pela preferencia!</p>
         <p>Volte sempre!</p>
       </div>
-      <p className="border-t border-dashed border-gray-400 my-2" />
+      <p className="border-t border-dashed border-input my-2" />
       <div className="text-center">
         <p className="font-bold">** DOCUMENTO NAO FISCAL **</p>
       </div>
@@ -130,7 +130,7 @@ function CancelModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40">
-      <div className="w-full max-w-sm rounded-xl bg-white shadow-xl p-6">
+      <div className="w-full max-w-sm rounded-xl bg-surface shadow-xl p-6">
         <div className="flex items-start gap-3 mb-4">
           <AlertTriangle className="h-5 w-5 text-destructive shrink-0 mt-0.5" />
           <div>
@@ -154,7 +154,7 @@ function CancelModal({
           />
         </div>
         {errorMsg && (
-          <p className="mb-3 text-sm text-destructive rounded-lg bg-red-50 border border-destructive/20 px-3 py-2">
+          <p className="mb-3 text-sm text-destructive rounded-lg bg-danger-muted border border-destructive/20 px-3 py-2">
             {errorMsg}
           </p>
         )}
@@ -239,7 +239,7 @@ export default function VendaDetalhePage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <Loader2 className="h-6 w-6 animate-spin text-brand-600" />
+        <Loader2 className="h-6 w-6 animate-spin text-accent-foreground" />
       </div>
     )
   }
@@ -268,14 +268,15 @@ export default function VendaDetalhePage() {
         />
       )}
 
-      <div className="px-4 py-7 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+      <div className="receipt-page px-4 py-7 sm:px-6 lg:px-8 max-w-4xl mx-auto">
 
         {/* Cabeçalho — no-print */}
         <div className="no-print mb-6">
-          <div className="flex items-start gap-3">
+          <div className="flex flex-wrap items-start gap-3">
             <Link
               href="/vendas"
-              className="flex h-8 w-8 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted transition-colors mt-0.5"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg text-muted-foreground hover:bg-muted transition-colors mt-0.5"
+              aria-label="Voltar às vendas"
             >
               <ArrowLeft className="h-4 w-4" />
             </Link>
@@ -292,7 +293,7 @@ export default function VendaDetalhePage() {
                 {formatDateTime(new Date(sale.createdAt))} · {sale.paymentMethodLabel}
               </p>
             </div>
-            <div className="flex items-center gap-2 shrink-0">
+            <div className="flex w-full flex-wrap items-center gap-2">
               <Link href="/vendas/nova">
                 <Button size="sm">
                   <Plus className="h-4 w-4" />
@@ -321,7 +322,7 @@ export default function VendaDetalhePage() {
 
           {/* Banner cancelamento */}
           {cancelled && sale.cancelledAt && (
-            <div className="mt-4 flex items-center gap-2 rounded-lg border border-destructive/30 bg-red-50 px-4 py-3">
+            <div className="mt-4 flex items-center gap-2 rounded-lg border border-destructive/30 bg-danger-muted px-4 py-3">
               <AlertTriangle className="h-4 w-4 text-destructive shrink-0" />
               <p className="text-sm text-destructive">
                 Venda cancelada em {formatDateTime(new Date(sale.cancelledAt))}
@@ -332,7 +333,7 @@ export default function VendaDetalhePage() {
         </div>
 
         {/* Tabela de itens — no-print */}
-        <div className="no-print bg-white rounded-xl border border-border shadow-sm overflow-hidden mb-6">
+        <div className="no-print bg-surface rounded-xl border border-border shadow-sm overflow-hidden mb-6">
           {/* Header */}
           <div className="hidden sm:grid grid-cols-[1fr_8rem_4rem_7rem_8rem] gap-3 px-5 py-2.5 border-b border-border bg-muted/30">
             {['Produto', 'Tam/Cor', 'Qtd', 'Unit.', 'Subtotal'].map(h => (
@@ -340,8 +341,8 @@ export default function VendaDetalhePage() {
             ))}
           </div>
           {sale.items.map(item => (
-            <div key={item.id} className="grid grid-cols-[1fr_8rem_4rem_7rem_8rem] gap-3 px-5 py-3 border-b border-border last:border-0 items-center">
-              <p className="text-sm font-medium text-foreground truncate">{item.productName}</p>
+            <div key={item.id} className="grid grid-cols-2 sm:grid-cols-[minmax(0,1fr)_8rem_4rem_7rem_8rem] gap-3 px-5 py-3 border-b border-border last:border-0 items-center">
+              <p className="text-sm font-medium text-foreground break-words sm:truncate">{item.productName}</p>
               <p className="text-sm text-muted-foreground text-xs">
                 {variationDesc(item.size, item.color, item.variationSku)}
               </p>
@@ -375,7 +376,7 @@ export default function VendaDetalhePage() {
             )}
             <div className="flex justify-end gap-8 text-sm font-semibold border-t border-border pt-1.5">
               <span>Total</span>
-              <span className="w-24 text-right text-brand-700">{formatCurrency(sale.totalCents)}</span>
+              <span className="w-24 text-right text-accent-foreground">{formatCurrency(sale.totalCents)}</span>
             </div>
           </div>
         </div>

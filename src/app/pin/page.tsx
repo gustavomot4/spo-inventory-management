@@ -13,6 +13,7 @@ import { useState, useRef, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { Flame, Lock } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { AccessibilityControls } from '@/components/accessibility/AccessibilityControls'
 
 const PIN_LENGTH = 4
 
@@ -105,12 +106,12 @@ function PinScreen() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex items-center justify-center px-4">
+    <div className="min-h-screen bg-background flex items-center justify-center px-4 py-8">
       <div className="w-full max-w-sm">
 
         {/* Logo */}
         <div className="text-center mb-8">
-          <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-600 mb-4">
+          <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-primary mb-4">
             <Flame className="h-6 w-6 text-white" strokeWidth={1.5} aria-hidden="true" />
           </div>
           <h1 className="text-xl font-bold tracking-tight text-foreground">
@@ -122,7 +123,7 @@ function PinScreen() {
         </div>
 
         {/* Card do PIN */}
-        <div className="bg-white rounded-2xl border border-border shadow-sm p-6">
+        <div className="bg-surface rounded-2xl border border-border shadow-sm p-6">
           <div className="flex items-center justify-center gap-2 mb-5">
             <Lock className="h-4 w-4 text-muted-foreground" aria-hidden="true" />
             <p className="text-sm font-medium text-foreground">
@@ -146,13 +147,13 @@ function PinScreen() {
                 disabled={loading}
                 aria-label={`Dígito ${i + 1} do PIN`}
                 className={cn(
-                  'h-14 w-14 rounded-xl border-2 text-center text-2xl font-bold',
-                  'focus:outline-none focus:border-brand-600 transition-colors',
+                  'h-14 w-14 min-w-0 rounded-xl border-2 text-center text-2xl font-bold',
+                  'focus:outline-none focus:border-ring transition-colors',
                   'disabled:opacity-50',
                   error
-                    ? 'border-destructive bg-red-50 text-destructive'
+                    ? 'border-destructive bg-danger-muted text-destructive'
                     : digits[i]
-                    ? 'border-brand-300 bg-brand-50 text-brand-700'
+                    ? 'border-accent-border bg-accent text-accent-foreground'
                     : 'border-border bg-background text-foreground'
                 )}
               />
@@ -177,6 +178,9 @@ function PinScreen() {
         <p className="text-center text-xs text-muted-foreground mt-4">
                 Área protegida — somente pessoal autorizado
         </p>
+        <div className="mt-6 rounded-xl border border-border bg-surface p-4">
+          <AccessibilityControls />
+        </div>
       </div>
     </div>
   )

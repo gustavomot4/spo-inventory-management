@@ -307,7 +307,7 @@ export default function NovaVendaPage() {
         <div className="space-y-4">
 
           {/* Busca de produto */}
-          <div className="bg-white rounded-xl border border-border shadow-sm p-5">
+          <div className="bg-surface rounded-xl border border-border shadow-sm p-5">
             <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground mb-3">
               Adicionar Item
             </p>
@@ -332,7 +332,7 @@ export default function NovaVendaPage() {
 
               {/* Dropdown de sugestões */}
               {showSuggestions && productSuggestions.length > 0 && !selectedProduct && (
-                <div className="absolute z-20 mt-1 w-full rounded-lg border border-border bg-white shadow-lg overflow-hidden">
+                <div className="absolute z-20 mt-1 w-full rounded-lg border border-border bg-surface shadow-lg overflow-hidden">
                   {productSuggestions.map(p => (
                     <button
                       key={p.id}
@@ -377,8 +377,8 @@ export default function NovaVendaPage() {
                             outOfStock
                               ? 'border-border text-muted-foreground/50 bg-muted/30 cursor-not-allowed line-through'
                               : selected
-                              ? 'border-brand-600 bg-brand-50 text-brand-700'
-                              : 'border-border text-foreground hover:border-brand-300'
+                              ? 'border-ring bg-accent text-accent-foreground'
+                              : 'border-border text-foreground hover:border-accent-border'
                           )}
                         >
                           {variationLabel(v)}
@@ -424,7 +424,7 @@ export default function NovaVendaPage() {
           </div>
 
           {/* Carrinho */}
-          <div className="bg-white rounded-xl border border-border shadow-sm overflow-hidden">
+          <div className="bg-surface rounded-xl border border-border shadow-sm overflow-hidden">
             <div className="px-5 py-3.5 border-b border-border">
               <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground">
                 Carrinho {cart.length > 0 && `(${cart.length} ${cart.length === 1 ? 'item' : 'itens'})`}
@@ -473,7 +473,7 @@ export default function NovaVendaPage() {
                     <button
                       type="button"
                       onClick={() => removeItem(item.variationId)}
-                      className="flex h-7 w-7 items-center justify-center rounded text-muted-foreground hover:text-destructive hover:bg-red-50 transition-colors shrink-0"
+                      className="flex h-7 w-7 items-center justify-center rounded text-muted-foreground hover:text-destructive hover:bg-danger-muted transition-colors shrink-0"
                     >
                       <X className="h-4 w-4" />
                     </button>
@@ -488,7 +488,7 @@ export default function NovaVendaPage() {
         <div className="space-y-4">
 
           {/* Totais */}
-          <div className="bg-white rounded-xl border border-border shadow-sm p-5">
+          <div className="bg-surface rounded-xl border border-border shadow-sm p-5">
             <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground mb-4">
               Resumo
             </p>
@@ -554,13 +554,13 @@ export default function NovaVendaPage() {
               )}
               <div className="border-t border-border pt-2 flex justify-between font-semibold">
                 <span>Total</span>
-                <span className="text-brand-700 text-base">{formatCurrency(totalCents)}</span>
+                <span className="text-accent-foreground text-base">{formatCurrency(totalCents)}</span>
               </div>
             </div>
           </div>
 
           {/* Método de pagamento */}
-          <div className="bg-white rounded-xl border border-border shadow-sm p-5">
+          <div className="bg-surface rounded-xl border border-border shadow-sm p-5">
             <p className="text-xs font-medium uppercase tracking-widest text-muted-foreground mb-3">
               Pagamento
             </p>
@@ -573,8 +573,8 @@ export default function NovaVendaPage() {
                   className={cn(
                     'rounded-lg border px-3 py-2.5 text-sm font-medium transition-colors',
                     paymentMethod === method
-                      ? 'border-brand-600 bg-brand-50 text-brand-700'
-                      : 'border-border text-foreground hover:border-brand-300'
+                      ? 'border-ring bg-accent text-accent-foreground'
+                      : 'border-border text-foreground hover:border-accent-border'
                   )}
                 >
                   {PAYMENT_METHOD_LABELS[method]}
@@ -611,8 +611,8 @@ export default function NovaVendaPage() {
                         className={cn(
                           'rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors',
                           installments === 1
-                            ? 'border-brand-600 bg-brand-50 text-brand-700'
-                            : 'border-border text-foreground hover:border-brand-300'
+                            ? 'border-ring bg-accent text-accent-foreground'
+                            : 'border-border text-foreground hover:border-accent-border'
                         )}
                       >
                         1× à vista ({selectedMachine ? formatBasisPoints(selectedMachine.feeBasisPoints) : ''})
@@ -625,8 +625,8 @@ export default function NovaVendaPage() {
                           className={cn(
                             'rounded-lg border px-2.5 py-1.5 text-xs font-medium transition-colors',
                             installments === inst.installments
-                              ? 'border-brand-600 bg-brand-50 text-brand-700'
-                              : 'border-border text-foreground hover:border-brand-300'
+                              ? 'border-ring bg-accent text-accent-foreground'
+                              : 'border-border text-foreground hover:border-accent-border'
                           )}
                         >
                           {inst.installments}× ({formatBasisPoints(inst.feeBasisPoints)})
@@ -647,7 +647,7 @@ export default function NovaVendaPage() {
 
           {/* Erro + Botão Finalizar */}
           {submitError && (
-            <div className="rounded-lg border border-destructive/30 bg-red-50 px-4 py-3">
+            <div className="rounded-lg border border-destructive/30 bg-danger-muted px-4 py-3">
               <p className="text-sm text-destructive">{submitError}</p>
             </div>
           )}

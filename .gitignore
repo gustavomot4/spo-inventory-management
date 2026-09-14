@@ -64,3 +64,7 @@ desktop.ini
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Browser QA artifacts
+test-results/
+playwright-report/

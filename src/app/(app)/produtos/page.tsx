@@ -57,7 +57,7 @@ function ProductRow({ product }: { product: ProductListItem }) {
     >
       {/* Produto */}
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium text-foreground truncate group-hover:text-brand-700 transition-colors">
+        <p className="text-sm font-medium text-foreground truncate group-hover:text-accent-foreground transition-colors">
           {product.name}
         </p>
         <p className="text-xs text-muted-foreground mt-0.5">
@@ -285,7 +285,7 @@ export default function ProdutosPage() {
       </div>
 
       {/* Lista */}
-      <div className="bg-white rounded-xl border border-border shadow-sm overflow-hidden">
+      <div className="bg-surface rounded-xl border border-border shadow-sm overflow-hidden">
 
         {/* Header da tabela — só em telas maiores */}
         <div className="hidden md:grid grid-cols-[1fr_7rem_5rem_10rem] gap-4 px-6 py-3 border-b border-border bg-muted/30">

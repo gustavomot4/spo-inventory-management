@@ -13,7 +13,9 @@
     "db:generate": "prisma generate",
     "db:reset": "prisma migrate reset",
     "db:seed": "ts-node prisma/seed.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/accessibility.test.cjs",
+    "test:e2e": "playwright test"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
@@ -31,6 +33,7 @@
     "tailwind-merge": "^2.5.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.63.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20.17.10",
     "@types/react": "^18.3.12",

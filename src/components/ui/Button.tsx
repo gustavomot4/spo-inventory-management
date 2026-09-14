@@ -44,11 +44,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           size === 'lg' && 'px-5 py-2.5 text-sm',
           // Variants
           variant === 'primary' &&
-            'bg-brand-600 text-white hover:bg-brand-700',
+            'bg-primary text-white hover:bg-primary-hover',
           variant === 'secondary' &&
-            'bg-white border border-border text-foreground hover:bg-muted',
+            'bg-surface border border-border text-foreground hover:bg-muted',
           variant === 'destructive' &&
-            'bg-destructive text-destructive-foreground hover:opacity-90',
+            'bg-danger-solid text-destructive-foreground hover:opacity-90',
           variant === 'ghost' &&
             'text-foreground hover:bg-muted',
           className
