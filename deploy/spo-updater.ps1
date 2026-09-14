@@ -215,6 +215,27 @@ function Test-Health([string]$ExpectedVersion) {
   return $false
 }
 
+function Remove-ForeignContainers([string]$Docker) {
+  # Os servicos usam container_name fixo. Se ja existir um container com esse
+  # nome criado por OUTRO projeto compose (ex.: pasta renomeada), o "up -d"
+  # falha com "name already in use". Os dados ficam no volume nomeado, entao
+  # remover o container antigo e seguro.
+  try {
+    $cfg = (& $Docker compose config --format json 2>$null) -join "`n" | ConvertFrom-Json
+    $project = [string]$cfg.name
+    foreach ($svc in $cfg.services.PSObject.Properties) {
+      $cname = [string]$svc.Value.container_name
+      if (-not $cname) { continue }
+      $owner = & $Docker inspect $cname --format '{{index .Config.Labels "com.docker.compose.project"}}' 2>$null
+      if ($LASTEXITCODE -ne 0) { continue }
+      if ([string]$owner -ne $project) {
+        Write-Log "Container '$cname' pertence a outro projeto compose ('$owner' != '$project') - removendo para evitar conflito de nome." 'WARN'
+        & $Docker rm -f $cname 2>$null | Out-Null
+      }
+    }
+  } catch { Write-Log "Verificacao de containers conflitantes falhou (nao critico): $($_.Exception.Message)" 'WARN' }
+}
+
 function Invoke-Retention([string]$Docker, [string[]]$Keep) {
   # mantem apenas a imagem atual e a anterior (rollback offline) - GITOPS-008
   try {
@@ -292,6 +313,7 @@ try {
   }
 
   # 4. aplicar
+  Remove-ForeignContainers $docker
   & $docker compose up -d
   if ($LASTEXITCODE -ne 0) { Write-Log 'compose up falhou - iniciando rollback.' 'ERROR' }
 
@@ -315,6 +337,7 @@ try {
     Restore-PreUpdateBackup $docker | Out-Null
   }
   Set-LocalVersion $rollbackRef
+  Remove-ForeignContainers $docker
   & $docker compose up -d
   if (Test-Health $rollbackRef) {
     Write-Log "Rollback concluido - sistema operando em $rollbackRef. Investigar a release $target antes de promover de novo." 'WARN'
